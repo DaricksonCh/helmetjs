@@ -8,6 +8,10 @@ var app = express();
 app.disable("x-powered-by");
 var fs = require("fs");
 var path = require("path");
+const helmet = require("helmet")
+
+app.use(helmet.hidePoweredBy());
+
 
 app.use(function (req, res, next) {
   res.set({
@@ -32,6 +36,7 @@ app.get("/file/*?", function (req, res, next) {
 });
 
 var main = require("./myApp.js");
+const helmet = require("helmet");
 app.get("/app-info", function (req, res) {
   // list middlewares mounted on the '/' camper's app
   var appMainRouteStack = main._router.stack
